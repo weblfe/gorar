@@ -54,10 +54,10 @@ func Test_DetectType(t *testing.T) {
 			},
 			{
 				filePath: "testdata/test.tar.gz",
-				want:     "tar.gz",
+				want:     "gz",
 			}, {
 				filePath: "testdata/test.tar.xz",
-				want:     "tar.xz",
+				want:     "xz",
 			},
 			{
 				filePath: "testdata/test.tar",

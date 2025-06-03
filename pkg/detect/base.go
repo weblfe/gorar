@@ -5,6 +5,8 @@ import (
 	"errors"
 	"io/fs"
 	"os"
+	"path/filepath"
+	"strings"
 )
 
 // 压缩格式魔数签名库
@@ -56,6 +58,18 @@ var signatures = []struct {
 //	参数：filePath string 文件路径
 //	可选参数: fss  fs.FS 文件系统
 func Detect(filePath string, fss ...fs.FS) (string, error) {
+	var (
+		ext    string
+		source = filePath
+	)
+	for strings.Contains(source, ".") {
+		ext = filepath.Ext(source)[1:]
+		source = ext
+	}
+	if ext != "" && ext == source {
+		return ext, nil
+	}
+
 	var (
 		err  error
 		file fs.File
